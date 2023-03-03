@@ -240,3 +240,16 @@ WHERE Team_Stats_Per_Season.team_stats_per_season_id = :team_stats_per_season_id
 DELETE FROM Team_Stats_Per_Season
 WHERE team_id = (SELECT Teams.team_id FROM Teams WHERE team_name = :team_nameInput)) 
 AND season_id = (SELECT season.game_id FROM Seasons WHERE season_year = :season_yearInput);
+
+
+------------------------------------------------------------------------------
+-- Drop Down queries --
+------------------------------------------------------------------------------
+-- mySQL query to grab all the stats in Player_Stats_Per_Game
+SELECT * FROM Player_Stats_Per_Game
+
+-- mySQL query to grab the player's names and ids to use in the drop down
+SELECT player_id, CONCAT(f_name, ' ',l_name) AS name FROM Players
+
+-- mySQL query to grab the game ids and dates to use in the drop down
+SELECT game_id, game_date FROM Games
