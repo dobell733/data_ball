@@ -76,7 +76,7 @@ VALUES (1, 'Luka', 'Doncic', 'Shooting Guard', 23, 12000000),
 
 -- Creates an intersection table named Player_Stats_Per_Games
 CREATE or REPLACE TABLE Player_Stats_Per_Game (
-    stats_per_game_id int NOT NULL AUTO_INCREMENT,
+    player_stats_per_game_id int NOT NULL AUTO_INCREMENT,
     player_id int NOT NULL,
     game_id int NOT NULL,
     minutes_per_game DECIMAL(19,2) NOT NULL,
@@ -91,7 +91,7 @@ CREATE or REPLACE TABLE Player_Stats_Per_Game (
     win boolean NOT NULL,
     FOREIGN KEY (player_id) REFERENCES Players(player_id) ON DELETE CASCADE,
     FOREIGN KEY (game_id) REFERENCES Games(game_id) ON DELETE CASCADE,
-    PRIMARY KEY (stats_per_game_id)
+    PRIMARY KEY (player_stats_per_game_id)
 );
 
 -- Insert Data into Player_Stats_Per_Game
@@ -105,7 +105,7 @@ VALUES (1, 1, 40, 0.45, 0.54, 0.74, 0.64, 0.65, 17, 6, 0, 1),
 
 -- Creates an intersection table named Player_Stats_Per_Games
 CREATE or REPLACE TABLE Player_Stats_Per_Season (
-    stats_per_season_id int NOT NULL AUTO_INCREMENT,
+    player_stats_per_season_id int NOT NULL AUTO_INCREMENT,
     player_id int NOT NULL,
     season_id int NOT NULL,
     average_minutes_per_game DECIMAL(19,2) NOT NULL,
@@ -119,7 +119,7 @@ CREATE or REPLACE TABLE Player_Stats_Per_Season (
     block_count int NOT NULL,
     FOREIGN KEY (player_id) REFERENCES Players(player_id) ON DELETE CASCADE,
     FOREIGN KEY (season_id) REFERENCES Seasons(season_id) ON DELETE CASCADE,
-    PRIMARY KEY (stats_per_season_id)
+    PRIMARY KEY (player_stats_per_season_id)
 );
 
 -- Insert Data into Player_Stats_Per_Season
