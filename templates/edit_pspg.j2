@@ -1,0 +1,101 @@
+<html>
+
+<head>
+	<title>Edit People</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <div>
+        <table border="1" cellpadding="5"> 
+            <caption> Editing Player_Stats_Per_Game: </caption>
+            <!-- Access data tuple passed from app.py -->
+            {% if player_stats_data %}
+                <thead>
+                    <tr>
+                        <!-- Iterate through each key in the first entry to get the column name -->
+                        {% for key in player_stats_data[0].keys() %}
+
+                        <!-- Create a <th> tag with the key inside of it, this will be our header row -->
+                        <th scope="col" data-field="{{ key }}" data-filter-control="input">{{ key }}</th>
+                        
+                        <!-- End of this for loop -->
+                        {% endfor %} 
+                    </tr>
+
+                <tbody>
+                    <!-- Now, iterate through every item in data -->
+                    {% for item in player_stats_data %}
+                    <tr>
+                        <!-- Then iterate through every key in the current item dictionary -->
+                        {% for key in item.keys() %}
+                        
+                        <!-- Create a <td> element with the value of that key in it -->
+                        <td>{{item[key]}}</td> {% endfor %} 
+                    </tr> 
+                    {% endfor %} 
+            {% endif %} 
+        </table>
+
+        <div id="edit">
+            <!-- form to edit data in bsg_people-->
+            <form id="editPlayerStat" action="/edit_player_stat/{{player_stats_data[0].stats_per_game_id}}" method="post">
+                <legend><strong>Edit Player Stats Per Game</strong></legend>
+                <input type="hidden" value="{{player_stats_data[0].stats_per_game_id}}" class="form-control" id="stats_per_game_id" name="stats_per_game_id" required>
+                
+                <label for="player_id">Player: </label>
+            <select name="player_id" id="player_id" required>
+                <!-- Iterate through each dictionary in the player_data -->
+                {% for dict in player_data %}
+
+                <!-- This maps player_id to the name displayed in the drop down. The value sent back is player_id -->
+                <option value="{{ dict['player_id'] }}">{{ dict['name'] }}</option>
+
+                 {% endfor %}
+            </select>
+            <br>
+            <label for="game_id">Game Date: </label>
+            <select name="game_id" id="game_id" required>
+                <!-- This maps game_id to game date so the user only has to select the date but the value being sent back to the server will be the game_id. -->
+                {% for dict in game_data %}
+
+                <option value="{{ dict['game_id'] }}">{{ dict['game_date'] }}</option>
+
+                {% endfor %}
+            </select>
+            <br>
+            <label for="minutes_per_game">Minutes Per Game: </label>
+            <input id="minutes_per_game" type="number" name="minutes_per_game" step="0.01" min="0" required>
+            <br>
+            <label for="field_goal_percentage">Field Goal Percentage: </label>
+            <input id="field_goal_percentage" type="number" name="field_goal_percentage" step="0.01" min="0" required>
+            <br>
+            <label for="three_point_percentage">Three Point Percentage: </label>
+            <input id="three_point_percentage" type="number" name="three_point_percentage" step="0.01" min="0" required>
+            <br>
+            <label for="two_point_percentage">Two Point Percentage: </label>
+            <input id="two_point_percentage" type="number" name="two_point_percentage" step="0.01" min="0" required>
+            <br>
+            <label for="free_throw_percentage">Free Throw Percentage: </label>
+            <input id="free_throw_percentage" type="number" name="free_throw_percentage" step="0.01" min="0" required>
+            <br>
+            <label for="rebounds">Rebound Count: </label>
+            <input id="rebounds" type="number" name="rebounds" required>
+            <br>
+            <label for="assists">Assist Count: </label>
+            <input id="assists" type="number" name="assists" required>
+            <br>
+            <label for="steals">Steal Count: </label>
+            <input id="steals" type="number" name="steals" required>
+            <br>
+            <label for="blocks">Block Count: </label>
+            <input id="blocks" type="number" name="blocks" required>
+            <br>
+            <label for="win">Win: </label>
+            <input id="win" type="number" name="win" required>
+            <br>
+            <input type="submit" value="Edit Player Stats" name="Edit_Player_Stats" class="btn"">
+        </form>
+    </div>
+
+</html>
