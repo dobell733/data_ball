@@ -21,6 +21,7 @@
         <thead>
             <tr>
                 <th>Delete</th>
+                <th>Edit</th>
                 <!-- Iterate through each key in the first entry to get the column name -->
                 {% for key in player_stats_data[0].keys() %}
                 
@@ -35,7 +36,16 @@
             <!-- Iterate through every entry in Player_Stats_Per_Game -->
             {% for stat_line in player_stats_data %}
             <tr>
-                <td><button type="button" class="table_button">Delete</button></td>
+                <td>
+                    <form action="delete_player_stat/{{ stat_line['stats_per_game_id'] }}">
+                            <button type="submit">Delete</button>
+                    </form>
+                </td>
+                <td>
+                    <form action="edit_player_stat/{{ stat_line['stats_per_game_id'] }}">
+                            <button type="submit">Edit</button>
+                    </form>
+                </td>
                 <!-- Iterate through every key in the current stat_line dictionary -->
                 {% for key in stat_line.keys() %}
 
