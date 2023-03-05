@@ -21,7 +21,7 @@
         <thead>
             <tr>
                 <th>Delete</th>
-                <th>Edit</th>
+                <!-- <th>Edit</th> -->
                 <!-- Iterate through each key in the first entry to get the column name -->
                 {% for key in player_stats_data[0].keys() %}
                 
@@ -41,11 +41,11 @@
                             <button type="submit">Delete</button>
                     </form>
                 </td>
-                <td>
+                <!-- <td>
                     <form action="edit_player_stat/{{ stat_line['stats_per_game_id'] }}">
                             <button type="submit">Edit</button>
                     </form>
-                </td>
+                </td> -->
                 <!-- Iterate through every key in the current stat_line dictionary -->
                 {% for key in stat_line.keys() %}
 
@@ -119,61 +119,61 @@
 
     <!-- Form to update a player's stats per game -->
     <div id="form-container">
-        <form method="PUT" id="update-player-stats-per-game">
-            <!-- These form inputs eventually need to populate based on which player is selected, for now they show all of the Player Stats Per Game info for Luka Doncic as an example -->
+        <form method="POST" action="/player_stats_per_game" id="update-player-stats-per-game">
             <legend><strong>Update Player Stats Per Game</strong></legend>
-            <label for="player">Player: </label>
-            <select name="player" id="player" required>
-                <!-- This maps player_id to player name so the user only has to select the name but the value being sent back to the server will be the ID -->
-                <option value="0">&nbsp;</option>
-                <option value="1" selected>Luka Doncic</option>
-                <option value="2">Lebron James</option>
-                <option value="3">Kevin Durant</option>
-                <option value="4">Giannis Antetokounmpo</option>
+            <label for="update_player_id">Player: </label>
+            <select name="player_id" id="update_player_id" required>
+                <option disabled selected value>Player to Update</option>
+                <!-- Iterate through each dictionary in the player_data -->
+                {% for dict in player_data %}
+                <!-- This maps player_id to the name displayed in the drop down. The value sent back is player_id -->
+                <option value="{{ dict['player_id'] }}">{{ dict['name'] }} (id: {{ dict['player_id'] }})</option>
+
+                 {% endfor %}
             </select>
             <br>
-            <label for="game_date">Game Date: </label>
-            <select name="game" id="game_date">
-                <!-- This maps game_id to game date so the user only has to select the date but the value being sent back to the server will be the ID. This value can be empty (NULL) to meet assignment requirements -->
-                <option value="0">&nbsp;</option>
-                <option value="1" selected>2021-02-01</option>
-                <option value="2">2021-03-03</option>
-                <option value="3">2021-03-04</option>
-                <option value="4">2022-04-04</option>
+            <label for="update_game_id">Game Date: </label>
+            <select name="game_id" id="update_game_id" required>
+                <option disabled selected value>Game Date to Update</option>
+                <!-- Iterate through each dictionary in the game_data -->
+                {% for dict in game_data %}
+                <!-- This maps game_id to the name displayed in the drop down. The value sent back is player_id -->
+                <option value="{{ dict['game_id'] }}">{{ dict['game_date'] }} (id: {{ dict['game_id'] }})</option>
+
+                {% endfor %}
             </select>
             <br>
-            <label for="minutes_per_game">Minutes Per Game: </label>
-            <input id="minutes_per_game" type="number" name="minutes_per_game" value="40.00" required>
+            <label for="update_minutes_per_game">Minutes Per Game: </label>
+            <input id="update_minutes_per_game" type="number" name="minutes_per_game"  required>
             <br>
-            <label for="field_goal_percentage">Field Goal Percentage: </label>
-            <input id="field_goal_percentage" type="number" name="field_goal_percentage" value="0.45" required>
+            <label for="update_field_goal_percentage">Field Goal Percentage: </label>
+            <input id="update_field_goal_percentage" type="number" name="field_goal_percentage" required>
             <br>
-            <label for="three_point_percentage">Three Point Percentage: </label>
-            <input id="three_point_percentage" type="number" name="three_point_percentage" value="0.54" required>
+            <label for="update_three_point_percentage">Three Point Percentage: </label>
+            <input id="update_three_point_percentage" type="number" name="three_point_percentage"  required>
             <br>
-            <label for="two_point_percentage">Two Point Percentage: </label>
-            <input id="two_point_percentage" type="number" name="two_point_percentage" value="0.74" required>
+            <label for="update_two_point_percentage">Two Point Percentage: </label>
+            <input id="update_two_point_percentage" type="number" name="two_point_percentage" required>
             <br>
-            <label for="free_throw_percentage">Free Throw Percentage: </label>
-            <input id="free_throw_percentage" type="number" name="free_throw_percentage" value="0.64" required>
+            <label for="update_free_throw_percentage">Free Throw Percentage: </label>
+            <input id="update_free_throw_percentage" type="number" name="free_throw_percentage"  required>
             <br>
-            <label for="rebounds">Rebound Count: </label>
-            <input id="rebounds" type="number" name="rebounds" value="1" required>
+            <label for="update_rebounds">Rebound Count: </label>
+            <input id="update_rebounds" type="number" name="rebounds"  required>
             <br>
-            <label for="assists">Assist Count: </label>
-            <input id="assists" type="number" name="assists" value="17" required>
+            <label for="update_assists">Assist Count: </label>
+            <input id="update_assists" type="number" name="assists"  required>
             <br>
-            <label for="steals">Steal Count: </label>
-            <input id="steals" type="number" name="steals" value="6" required>
+            <label for="update_steals">Steal Count: </label>
+            <input id="update_steals" type="number" name="steals" required>
             <br>
-            <label for="blocks">Block Count: </label>
-            <input id="blocks" type="number" name="blocks" value="0" required>
+            <label for="update_blocks">Block Count: </label>
+            <input id="update_blocks" type="number" name="blocks"  required>
             <br>
-            <label for="win">Win: </label>
-            <input id="win" type="number" name="win" value="1" required>
+            <label for="update_win">Win: </label>
+            <input id="update_win" type="number" name="win"  required>
             <br>
-            <button type="submit">Update Player Stats</button>
-            <!-- <button type="button">Cancel</button> -->
+            <input type="submit" value="Update Player Stats" name="Update_Player_Stats" class="btn"">
         </form>
     </div>
 </body>

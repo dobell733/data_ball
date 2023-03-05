@@ -1,0 +1,104 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Ball</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+</head>
+
+<body>
+    <h1>Data Ball</h1>
+
+    <nav>
+        <a href="/">Home</a> | <a href="/seasons">Seasons</a> | <a href="/players">Players</a> | <a href="/teams">Teams</a> | <a href="/games">Games</a> | <a href="/player_stats_per_game">Player Stats Per Game</a> | <a href="/player_stats_per_season">Player Stats Per Season</a> | <a href="/team_stats_per_season">Team Stats Per Season</a>
+    </nav>
+
+    <h2>Player Stats Per Season</h2>
+
+    <!-- Table displaying the Player Stats Per Game entity -->
+    <table>
+        <thead>
+            <tr>
+                <!-- Iterate through each key in the first entry to get the column name -->
+                {% for key in player_stats_data[0].keys() %}
+                
+                <!-- Create a <th> tag with the key inside of it -->
+                <th>{{ key }}</th>
+
+                {% endfor %}
+            </tr>
+        </thead>
+    
+        <tbody>
+            <!-- Iterate through every entry in Player_Stats_Per_Game -->
+            {% for stat_line in player_stats_data %}
+            <tr>
+                <!-- Iterate through every key in the current stat_line dictionary -->
+                {% for key in stat_line.keys() %}
+
+                <!-- Create a <td> element with the value of that key in it -->
+                <td>{{ stat_line[key] }}</td>
+
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Form to add a player's stats per game -->
+    <div id="form-container">
+        <form method="POST" action="/player_stats_per_season" id="add-player-stats-per-season">
+            <legend><strong>Add Player Stats Per Season</strong></legend>
+            <label for="player_id">Player: </label>
+            <select name="player_id" id="player_id" required>
+                <!-- Iterate through each dictionary in the player_data -->
+                {% for dict in player_data %}
+
+                <!-- This maps player_id to the name displayed in the drop down. The value sent back is player_id -->
+                <option value="{{ dict['player_id'] }}">{{ dict['name'] }} (id: {{ dict['player_id'] }})</option>
+
+                 {% endfor %}
+            </select>
+            <br>
+            <label for="season_id">Year: </label>
+            <select name="season_id" id="season_id" required>
+                <!-- This maps season_id to year so the user only has to select the year but the value being sent back to the server will be the season_id. -->
+                {% for dict in season_data %}
+
+                <option value="{{ dict['season_id'] }}">{{ dict['year'] }} (id: {{ dict['season_id'] }})</option>
+
+                {% endfor %}
+            </select>
+            <br>
+            <label for="minutes_per_game">Minutes Per Game: </label>
+            <input id="minutes_per_game" type="number" name="minutes_per_game" step="0.01" min="0" required>
+            <br>
+            <label for="field_goal_percentage">Field Goal Percentage: </label>
+            <input id="field_goal_percentage" type="number" name="field_goal_percentage" step="0.01" min="0" required>
+            <br>
+            <label for="three_point_percentage">Three Point Percentage: </label>
+            <input id="three_point_percentage" type="number" name="three_point_percentage" step="0.01" min="0" required>
+            <br>
+            <label for="two_point_percentage">Two Point Percentage: </label>
+            <input id="two_point_percentage" type="number" name="two_point_percentage" step="0.01" min="0" required>
+            <br>
+            <label for="free_throw_percentage">Free Throw Percentage: </label>
+            <input id="free_throw_percentage" type="number" name="free_throw_percentage" step="0.01" min="0" required>
+            <br>
+            <label for="rebounds">Rebound Count: </label>
+            <input id="rebounds" type="number" name="rebounds" required>
+            <br>
+            <label for="assists">Assist Count: </label>
+            <input id="assists" type="number" name="assists" required>
+            <br>
+            <label for="steals">Steal Count: </label>
+            <input id="steals" type="number" name="steals" required>
+            <br>
+            <label for="blocks">Block Count: </label>
+            <input id="blocks" type="number" name="blocks" required>
+            <br>
+            <input type="submit" value="Add Player Season Stats" name="Add_Player_Seasons_Stats" class="btn"">
+        </form>
+</body>
+</html>

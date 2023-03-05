@@ -1,0 +1,83 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Ball</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+</head>
+
+<body>
+    <h1>Data Ball</h1>
+
+    <nav>
+        <a href="/">Home</a> | <a href="/seasons">Seasons</a> | <a href="/players">Players</a> | <a href="/teams">Teams</a> | <a href="/games">Games</a> | <a href="/player_stats_per_game">Player Stats Per Game</a> | <a href="/player_stats_per_season">Player Stats Per Season</a> | <a href="/team_stats_per_season">Team Stats Per Season</a>
+    </nav>
+
+    <h2>Games</h2>
+
+    <!-- Table displaying the Games entity -->
+    <table>
+        <thead>
+            <tr>
+                <!-- Iterate through each key in the first entry to get the column name -->
+                {% for key in games_data[0].keys() %}
+                
+                <!-- Create a <th> tag with the key inside of it -->
+                <th>{{ key }}</th>
+
+                {% endfor %}
+            </tr>
+        </thead>
+    
+        <tbody>
+            <!-- Iterate through every entry in Player_Stats_Per_Game -->
+            {% for entry in games_data %}
+            <tr>
+                <!-- Iterate through every key in the current entry dictionary -->
+                {% for key in entry.keys() %}
+
+                <!-- Create a <td> element with the value of that key in it -->
+                <td>{{ entry[key] }}</td>
+
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Form to add a game -->
+    <div id="form-container">
+        <form method="POST" action="/games" id="add-game">
+            <legend><strong>Add Game</strong></legend>
+            <label for="home_team">Home Team: </label>
+            <select name="home_team_id" id="home_team" required>
+                <!-- Iterate through each dictionary in the team_data -->
+                {% for dict in team_data %}
+
+                <!-- This maps team_id to the name displayed in the drop down. The value sent back is team_id -->
+                <option value="{{ dict['team_id'] }}">{{ dict['team_name'] }} (id: {{ dict['team_id'] }})</option>
+
+                 {% endfor %}
+            </select>
+            <br>
+            <label for="away_team">Away Team: </label>
+            <select name="away_team_id" id="away_team" required>
+                <!-- Iterate through each dictionary in the team_data -->
+                {% for dict in team_data %}
+
+                <!-- This maps team_id to the name displayed in the drop down. The value sent back is team_id -->
+                <option value="{{ dict['team_id'] }}">{{ dict['team_name'] }} (id: {{ dict['team_id'] }})</option>
+
+                 {% endfor %}
+            </select>
+            <br>
+            <label for="game_date">Game Date:</label>
+            <input type="date" id="game_date" name="game_date" required>
+            <br>
+            <input type="submit" value="Add Game" name="Add_Game" class="btn"">
+        </form>
+    </div>
+
+</body>
+</html>

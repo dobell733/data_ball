@@ -19,6 +19,7 @@ thead, tbody {
 }
 
 #form-container {
+    display: inline-flex;
     margin-top: 20px;
     margin-right: 50px;
     padding-top: 20px;

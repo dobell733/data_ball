@@ -1,0 +1,61 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Ball</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+</head>
+
+<body>
+    <h1>Data Ball</h1>
+
+    <nav>
+        <a href="/">Home</a> | <a href="/seasons">Seasons</a> | <a href="/players">Players</a> | <a href="/teams">Teams</a> | <a href="/games">Games</a> | <a href="/player_stats_per_game">Player Stats Per Game</a> | <a href="/player_stats_per_season">Player Stats Per Season</a> | <a href="/team_stats_per_season">Team Stats Per Season</a>
+    </nav>
+
+    <h2>Teams</h2>
+
+    <!-- Table displaying the Teams entity -->
+    <table>
+        <thead>
+            <tr>
+                <!-- Iterate through each key in the first entry to get the column name -->
+                {% for key in teams_data[0].keys() %}
+                
+                <!-- Create a <th> tag with the key inside of it -->
+                <th>{{ key }}</th>
+
+                {% endfor %}
+            </tr>
+        </thead>
+    
+        <tbody>
+            <!-- Iterate through every entry in Teams -->
+            {% for entry in teams_data %}
+            <tr>
+                <!-- Iterate through every key in the current entry dictionary -->
+                {% for key in entry.keys() %}
+
+                <!-- Create a <td> element with the value of that key in it -->
+                <td>{{ entry[key] }}</td>
+
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Form to add a team -->
+    <div id="form-container">
+        <form method="POST" action="/teams" id="add-team">
+            <legend><strong>Add Team</strong></legend>
+            <label for="team_name">Team Name: </label>
+            <input id="team_name" type="text" name="team_name" required>
+            <br>
+            <input type="submit" value="Add Team" name="Add_Team" class="btn"">
+        </form>
+    </div>
+
+</body>
+</html>
