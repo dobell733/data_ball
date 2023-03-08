@@ -33,6 +33,9 @@ app.register_blueprint(player_sps_routes)
 from teams import teams_routes
 app.register_blueprint(teams_routes)
 
+from update_player_spg import update_player_spg_routes
+app.register_blueprint(update_player_spg_routes)
+    
 # Listener
 if __name__ == "__main__":
 

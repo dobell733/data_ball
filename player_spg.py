@@ -19,7 +19,7 @@ def player_stats_per_game():
         cursor.execute(query2)
         player_data = cursor.fetchall()
 
-        # mySQL query to grab the game ids and dats to use in the drop down
+        # mySQL query to grab the game ids and dates to use in the drop down
         query3 = "SELECT game_id, game_date FROM Games"
         cursor = mysql.connection.cursor()
         cursor.execute(query3)
@@ -79,9 +79,9 @@ def player_stats_per_game():
             # redirect back to player stats per game page
             return redirect("/player_stats_per_game")
     
-@player_spg_routes.route("/delete_player_stat/<string:stats_per_game_id>")
-def delete_pspg(stats_per_game_id):
-    query = "DELETE FROM Player_Stats_Per_Game WHERE stats_per_game_id = '%s'" % (stats_per_game_id)
+@player_spg_routes.route("/delete_player_stat/<string:player_stats_per_game_id>")
+def delete_pspg(player_stats_per_game_id):
+    query = "DELETE FROM Player_Stats_Per_Game WHERE player_stats_per_game_id = '%s'" % (player_stats_per_game_id)
     cursor = mysql.connection.cursor()
     cursor.execute(query)
     mysql.connection.commit()
