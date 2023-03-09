@@ -7,8 +7,8 @@ player_spg_routes = Blueprint('player_spg_routes', __name__)
 def player_stats_per_game():
     # read Player_Stats_Per_Game info
     if request.method == 'GET':
-        # mySQL query to grab all the stats in Player_Stats_Per_Game
-        query = "SELECT * FROM Player_Stats_Per_Game"
+        # mySQL query to grab all the stats in Player_Stats_Per_Game and display the player name and game date as well
+        query = "SELECT Player_Stats_Per_Game.player_stats_per_game_id, Player_Stats_Per_Game.player_id, Player_Stats_Per_Game.game_id, CONCAT(Players.f_name, ' ', Players.l_name) AS player_name, Games.game_date, Player_Stats_Per_Game.minutes_per_game, Player_Stats_Per_Game.field_goal_percentage, Player_Stats_Per_Game.three_point_percentage, Player_Stats_Per_Game.two_point_percentage, Player_Stats_Per_Game.free_throw_percentage, Player_Stats_Per_Game.rebound_count, Player_Stats_Per_Game.assist_count, Player_Stats_Per_Game.steal_count, Player_Stats_Per_Game.block_count, Player_Stats_Per_Game.win FROM Player_Stats_Per_Game INNER JOIN Players ON Player_Stats_Per_Game.player_id = Players.player_id INNER JOIN Games ON Player_Stats_Per_Game.game_id = Games.game_id"
         cursor = mysql.connection.cursor()
         cursor.execute(query)
         player_stats_data = cursor.fetchall()
