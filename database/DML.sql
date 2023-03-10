@@ -130,7 +130,24 @@ DELETE FROM Player_Stats_Per_Game
 WHERE player_id=(SELECT Players.player_id FROM Players WHERE f_name=:f_nameInput, l_name= :l_nameInput)
 AND game_id = (SELECT Games.game_id FROM Games WHERE home_team_id = :home_team_idInput, away_team_id =: away_team_idInput);
 
-
+-- mySQL query to grab all the stats in Player_Stats_Per_Game and display the player name and game date as well
+SELECT Player_Stats_Per_Game.player_stats_per_game_id, 
+       Player_Stats_Per_Game.player_id, 
+       Player_Stats_Per_Game.game_id, 
+       CONCAT(Players.f_name, ' ', Players.l_name) AS player_name, 
+       Games.game_date, Player_Stats_Per_Game.minutes_per_game, 
+       Player_Stats_Per_Game.field_goal_percentage, 
+       Player_Stats_Per_Game.three_point_percentage, 
+       Player_Stats_Per_Game.two_point_percentage, 
+       Player_Stats_Per_Game.free_throw_percentage, 
+       Player_Stats_Per_Game.rebound_count, 
+       Player_Stats_Per_Game.assist_count, 
+       Player_Stats_Per_Game.steal_count, 
+       Player_Stats_Per_Game.block_count, 
+       Player_Stats_Per_Game.win 
+FROM Player_Stats_Per_Game 
+INNER JOIN Players ON Player_Stats_Per_Game.player_id = Players.player_id 
+INNER JOIN Games ON Player_Stats_Per_Game.game_id = Games.game_id
 
 ------------------------------------------------------------------------------
 -- Player_Stats_Per_Season queries --
