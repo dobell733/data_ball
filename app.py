@@ -33,7 +33,6 @@ app.register_blueprint(player_sps_routes)
 from teams import teams_routes
 app.register_blueprint(teams_routes)
 
-<<<<<<< HEAD
 from players import players_routes
 app.register_blueprint(players_routes)
 
@@ -43,13 +42,10 @@ app.register_blueprint(seasons_routes)
 from team_sps import team_sps_routes
 app.register_blueprint(team_sps_routes)
 
-
-=======
 from update_player_spg import update_player_spg_routes
 app.register_blueprint(update_player_spg_routes)
     
->>>>>>> 1697c984d9f84f1c1bac0178f3117a5540258dca
 # Listener
 if __name__ == "__main__":
 
-    app.run(port=56032, debug=True)
+    app.run(port=56031, debug=True)
