@@ -37,12 +37,12 @@
             {% for stat_line in player_stats_data %}
             <tr>
                 <td>
-                    <form action="delete_player_stat/{{ stat_line['stats_per_game_id'] }}">
+                    <form action="delete_player_stat/{{ stat_line['player_stats_per_game_id'] }}">
                             <button type="submit">Delete</button>
                     </form>
                 </td>
                 <!-- <td>
-                    <form action="edit_player_stat/{{ stat_line['stats_per_game_id'] }}">
+                    <form action="edit_player_stat/{{ stat_line['player_stats_per_game_id'] }}">
                             <button type="submit">Edit</button>
                     </form>
                 </td> -->

@@ -1,0 +1,83 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Ball</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+</head>
+
+<body>
+    <h1>Data Ball</h1>
+
+    <nav>
+        <a href="/">Home</a> | <a href="/seasons">Seasons</a> | <a href="/players">Players</a> | <a href="/teams">Teams</a> | <a href="/games">Games</a> | <a href="/player_stats_per_game">Player Stats Per Game</a> | <a href="/player_stats_per_season">Player Stats Per Season</a> | <a href="/team_stats_per_season">Team Stats Per Season</a>
+    </nav>
+
+    <h2>Players</h2>
+
+    <!-- Table displaying the Players entity -->
+    <table>
+        <thead>
+            <tr>
+                <!-- Iterate through each key in the first entry to get the column name -->
+                {% for key in players_data[0].keys() %}
+                
+                <!-- Create a <th> tag with the key inside of it -->
+                <th>{{ key }}</th>
+
+                {% endfor %}
+            </tr>
+        </thead>
+    
+        <tbody>
+            <!-- Iterate through every entry in Players -->
+            {% for entry in players_data %}
+            <tr>
+                <!-- Iterate through every key in the current entry dictionary -->
+                {% for key in entry.keys() %}
+
+                <!-- Create a <td> element with the value of that key in it -->
+                <td>{{ entry[key] }}</td>
+
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Form to add a player -->
+    <div id="form-container">
+        <form method="POST" action="/players" id="add-player">
+            <legend><strong>Add Player</strong></legend>
+            <select name="team_id" id="team_id" required>
+                <!-- Iterate through each dictionary in the team_data -->
+                {% for dict in teams_data %}
+
+                <!-- This maps team_id to the name displayed in the drop down. The value sent back is team_id -->
+                <option value="{{ dict['team_id'] }}">{{ dict['team_name'] }} (id: {{ dict['team_id'] }})</option>
+
+                 {% endfor %}
+            </select>
+            <br>
+            <label for="f_name"> First Name: </label>
+            <input id="f_name" type="text" name="f_name" required>
+            <br>
+            <label for="l_name"> Last Name: </label>
+            <input id="l_name" type="text" name="l_name" required>
+            <br>
+            <label for="position"> Position: </label>
+            <input id="position" type="text" name="position" required>
+            <br>
+            <label for="age"> Age: </label>
+            <input id="age" type="number" name="age" required>
+            <br>
+            <label for="salary"> Salary: </label>
+            <input id="salary" type="number" name="salary" required>
+            <br>
+            <input type="submit" value="Add Player" name="Add_Player" class="btn"">
+        </form>
+    </div>
+
+</body>
+</html>

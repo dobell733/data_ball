@@ -79,9 +79,9 @@ def player_stats_per_game():
             # redirect back to player stats per game page
             return redirect("/player_stats_per_game")
     
-@player_spg_routes.route("/delete_player_stat/<string:stats_per_game_id>")
-def delete_pspg(stats_per_game_id):
-    query = "DELETE FROM Player_Stats_Per_Game WHERE stats_per_game_id = '%s'" % (stats_per_game_id)
+@player_spg_routes.route("/delete_player_stat/<string:player_stats_per_game_id>")
+def delete_pspg(player_stats_per_game_id):
+    query = "DELETE FROM Player_Stats_Per_Game WHERE player_stats_per_game_id = '%s'" % (player_stats_per_game_id)
     cursor = mysql.connection.cursor()
     cursor.execute(query)
     mysql.connection.commit()
