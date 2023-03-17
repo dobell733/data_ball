@@ -44,6 +44,9 @@ app.register_blueprint(team_sps_routes)
 
 from update_player_spg import update_player_spg_routes
 app.register_blueprint(update_player_spg_routes)
+
+from update_player import update_player_routes
+app.register_blueprint(update_player_routes)
     
 # Listener
 if __name__ == "__main__":

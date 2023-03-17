@@ -22,7 +22,6 @@
             <legend><strong>Update Player Stats Per Game</strong></legend>
             <label for="update_player_id">Player: </label>
             <select name="player_id" id="update_player_id" required>
-                <option disabled selected value>Player to Update</option>
                 <!-- Iterate through each dictionary in the player_data -->
                 {% for dict in player_data %}
                 <!-- This maps player_id to the name displayed in the drop down. The value sent back is player_id -->
@@ -38,7 +37,6 @@
             <br>
             <label for="update_game_id">Game Date: </label>
             <select name="game_id" id="update_game_id" required>
-                <option disabled selected value>Game Date to Update</option>
                 <!-- Iterate through each dictionary in the game_data -->
                 {% for dict in game_data %}
                 <!-- This maps game_id to the name displayed in the drop down. The value sent back is player_id -->

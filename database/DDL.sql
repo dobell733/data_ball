@@ -63,7 +63,7 @@ CREATE or REPLACE TABLE Players (
     age int not NULL,
     salary int not NULL,
     PRIMARY KEY (player_id),
-    FOREIGN KEY (team_id) REFERENCES Teams(team_id) ON DELETE CASCADE
+    FOREIGN KEY (team_id) REFERENCES Teams(team_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- Insert Data into Players

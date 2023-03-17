@@ -1,0 +1,100 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Ball</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+</head>
+
+<body>
+    <h1>Data Ball</h1>
+
+    <nav>
+        <a href="/">Home</a> | <a href="/seasons">Seasons</a> | <a href="/players">Players</a> | <a href="/teams">Teams</a> | <a href="/games">Games</a> | <a href="/player_stats_per_game">Player Stats Per Game</a> | <a href="/player_stats_per_season">Player Stats Per Season</a> | <a href="/team_stats_per_season">Team Stats Per Season</a>
+    </nav>
+    
+    <h2>Players</h2>
+
+    <!-- Form to update a player -->
+    <div id="form-container">
+        <form method="POST" action="/players" id="update-player">
+            <legend><strong>Update Player</strong></legend>
+            <br>
+            <label for="player_id">Player: </label>
+            <select name="player_id" id="player_id" required>
+                <!-- Iterate through each dictionary in the player_data -->
+                {% for dict in selected_player_data %}
+                <!-- This maps player_id to the name displayed in the drop down. The value sent back is player_id -->
+                <option value="{{ dict['player_id'] }}" 
+                        {% if dict['player_id'] == selected_player_data[0]['player_id'] %}
+                            selected
+                        {% endif %}>
+                            {{ dict['name'] }} (id: {{ dict['player_id'] }})
+                </option>
+
+                {% endfor %}
+            </select>
+            <br>
+            <label for="update_team_id">Team: </label>
+            <select name="team_id" id="update_team_id" required>
+                <option value="NULL">NULL</option>
+                <!-- Iterate through each dictionary in the team_data -->
+                {% for dict in team_data %}
+                <!-- This maps team_id to the name displayed in the drop down. The value sent back is team_id -->
+                <option value="{{ dict['team_id'] }}"
+                        {% if dict['team_id'] == selected_player_data[0]['team_id'] %}
+                            selected
+                        {% endif %}>
+                        {{ dict['team_name'] }} (id: {{ dict['team_id'] }})</option>
+                {% endfor %}
+            </select>
+            <br>
+            <label for="update_f_name">First Name: </label>
+            <input id="update_f_name" type="text" name="f_name"  value="{{ selected_player_data[0]['f_name'] }}" required>
+            <br>
+            <label for="update_l_name">Last Name: </label>
+            <input id="update_l_name" type="text" name="l_name" value="{{ selected_player_data[0]['l_name'] }}" required>
+            <br>
+            <label for="update_position">Position: </label>
+            <select name="position" id="update_position" required>
+            {% for dict in selected_player_data %}
+                <option {% if dict['position'] == 'Point Guard' %}
+                            selected
+                        {% endif %}>
+                        Point Guard
+                </option>
+                <option {% if dict['position'] == 'Shooting Guard' %}
+                            selected
+                        {% endif %}>
+                        Shooting Guard
+                </option>
+                <option {% if dict['position'] == 'Small Forward' %}
+                            selected
+                        {% endif %}>
+                        Small Forward
+                </option>
+                <option {% if dict['position'] == 'Power Forward' %}
+                            selected
+                        {% endif %}>
+                        Power Forward
+                </option>
+                <option {% if dict['position'] == 'Center' %}
+                            selected
+                        {% endif %}>
+                        Center
+                </option>
+            {% endfor %}
+            </select>
+            <br>
+            <label for="update_age"> Age: </label>
+            <input id="update_age" type="number" name="age" value="{{ selected_player_data[0]['age'] }}" min="18" required>
+            <br>
+            <label for="update_salary"> Salary: </label>
+            <input id="update_Fsalary" type="number" value="{{ selected_player_data[0]['salary'] }}" name="salary" required>
+            <br>
+            <input type="submit" value="Update Player" name="Update_Player" class="btn"">
+        </form>
+    </div>
+</body>
+</html>
