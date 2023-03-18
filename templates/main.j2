@@ -11,7 +11,14 @@
     <h1>Data Ball</h1>
 
     <nav>
-        <a href="/">Home</a> | <a href="/seasons">Seasons</a> | <a href="/players">Players</a> | <a href="/teams">Teams</a> | <a href="/games">Games</a> | <a href="/player_stats_per_game">Player Stats Per Game</a> | <a href="/player_stats_per_season">Player Stats Per Season</a> | <a href="/team_stats_per_season">Team Stats Per Season</a>
+        <a href="/">Home</a> 
+        <a href="/seasons">Seasons</a>
+        <a href="/players">Players</a>
+        <a href="/teams">Teams</a>
+        <a href="/games">Games</a>
+        <a href="/player_stats_per_game">Player Stats Per Game</a>
+        <a href="/player_stats_per_season">Player Stats Per Season</a>
+        <a href="/team_stats_per_season">Team Stats Per Season</a>
     </nav>
     
     <h2>Home Page</h2>
@@ -19,49 +26,51 @@
     The NBA is composed of 30 teams, every season each team plays 82 games, with each game lasting 48 minutes (not counting extra time), this comes out to 3936 minutes of high octane basketball played for a team every season. For teams with a roster size of between 15 and 20 players, this constitutes a tsunami of data, millions of data points for each individual player. Our company ‘Data Ball’ intends to bring order to all this data collected in an NBA season, so teams can make more informed decisions about each player in their roster. We will do this by building a web platform (utilizing databases to store and persist relevant data) that allows teams to look up each individual players metrics (Points, Field Goal Percentage, etc.) through each season played, this will aid teams in understanding a players impact in every aspect of play, in turn allowing them to make better coaching and financial decisions regarding any individual player.
     </p>
 
-    <h3>Seasons</h3>
-    <ul>
-        <li>Displays information for all seasons</li>
-        <li>Can insert entries</li>
-    </ul>
+    <div id="list-container">
+        <h3>Seasons</h3>
+        <ul>
+            <li>Displays information for all seasons</li>
+            <li>Can insert entries</li>
+        </ul>
 
-    <h3>Players</h3>
-    <ul>
-        <li>Displays information for all players</li>
-        <li>Can insert, update, and delete entries</li>
-    </ul>
+        <h3>Players</h3>
+        <ul>
+            <li>Displays information for all players</li>
+            <li>Can insert, update, and delete entries</li>
+        </ul>
 
-    <h3>Teams</h3>
-    <ul>
-        <li>Displays information for all teams</li>
-        <li>Can insert entries</li>
-    </ul>
+        <h3>Teams</h3>
+        <ul>
+            <li>Displays information for all teams</li>
+            <li>Can insert entries</li>
+        </ul>
 
-    <h3>Games</h3>
-    <ul>
-        <li>Displays information for all games</li>
-        <li>Can insert entries</li>
-    </ul>
+        <h3>Games</h3>
+        <ul>
+            <li>Displays information for all games</li>
+            <li>Can insert entries</li>
+        </ul>
 
-    <h3>Player Stats Per Game</h3>
-    <ul>
-        <li>Handles many-to-many relationship between Players and Games</li>
-        <li>Displays each player's stats per game played</li>
-        <li>Can insert, update, and delete entries</li>
-    </ul>
+        <h3>Player Stats Per Game</h3>
+        <ul>
+            <li>Handles many-to-many relationship between Players and Games</li>
+            <li>Displays each player's stats per game played</li>
+            <li>Can insert, update, and delete entries</li>
+        </ul>
 
-    <h3>Player Stats Per Season</h3>
-    <ul>
-        <li>Handles many-to-many relationship between Players and Seasons</li>
-        <li>Displays each player's stats per season played</li>
-        <li>Can insert entries</li>
-    </ul>
+        <h3>Player Stats Per Season</h3>
+        <ul>
+            <li>Handles many-to-many relationship between Players and Seasons</li>
+            <li>Displays each player's stats per season played</li>
+            <li>Can insert entries</li>
+        </ul>
 
-    <h3>Team Stats Per Season</h3>
-    <ul>
-        <li>Handles many-to-many relationship between Teams and Seasons</li>
-        <li>Displays each team's stats per season</li>
-        <li>Can insert entries</li>
-    </ul>
+        <h3>Team Stats Per Season</h3>
+        <ul>
+            <li>Handles many-to-many relationship between Teams and Seasons</li>
+            <li>Displays each team's stats per season</li>
+            <li>Can insert entries</li>
+        </ul>
+    </div>
 </body>
 </html>

@@ -1,45 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200&display=swap');
+
 * {
     box-sizing: border-box;
-    background-color: ;
+    font-family: 'Oswold', sans-serif;
+    background-color: rgb(34, 40, 49);
+    color: rgb(238, 238, 238)
+    /* border: 1px dotted red; */
 }
 
 table {
     text-align: center;
-    border: 3px solid black;
+    border: 3px solid rgb(238, 238, 238);
     border-collapse: collapse;
-  }
+    background-color: rgb(57, 62, 70);
+}
 
 th, td { 
-    border: 2px solid black;
+    border: 2px solid rgb(238, 238, 238);
     padding: 5px 5px;
     min-width: 100px;
-    font-size: medium;
+    background-color: rgb(57, 62, 70);
 }
 
 thead, tbody {
-    border: 2px solid black;
+    border: 2px solid rgb(238, 238, 238);
+    background-color: rgb(57, 62, 70);
+}
+
+#table-container {
+    display: flex;
+    justify-content: center;
+}
+
+table form {
+    background-color: rgb(57, 62, 70);
+}
+
+table form button {
+    margin-top: 10px;
+    padding: 5px 15px;
+    background-color: rgb(214, 90, 49);
+    border-radius: 5px;
+    font-weight: 750;
+    line-height: normal;
+    text-decoration: none;
+    color: rgb(34, 40, 49);
+    transition: all 0.5s;
+}
+
+table form button:hover {
+    cursor: pointer;
+}
+
+form input, form select {
+    border: 1px solid rgb(238, 238, 238);
+    border-radius: 5px;
 }
 
 #form-container {
-    display: inline-flex;
+    display: flex;
+    justify-content: center;
     margin-top: 20px;
-    margin-right: 50px;
     padding-top: 20px;
-    padding-left: 10px;
-    padding-bottom: 20px;
-    border: 1px solid black;
-}
-
-input, label, select {
-    margin: 5px;
 }
 
 #form-container legend {
     padding-bottom: 10px;
 }
 
-td button {
-    margin-top: 0;
+input, label, select {
+    margin: 5px;
 }
 
 button {
@@ -47,6 +77,84 @@ button {
 }
 
 .btn {
-    margin-top: 25px;
+    padding: 10px 20px;
+    margin: 10px 7px;
+    background-color: rgb(214, 90, 49);
+    border-radius: 5px;
+    font-weight: 750;
+    line-height: normal;
+    text-decoration: none;
+    color: rgb(34, 40, 49);
+    border: none;
 }
 
+.btn:hover {
+    cursor: pointer;
+}
+
+.btn:active {
+    padding: 10px 20px;
+    margin: 10px 7px;
+    background-color: rgb(34, 40, 49);
+    border-radius: 5px;
+    font-weight: 750;
+    text-decoration: none;
+    color: rgb(214, 90, 49);
+    border: 1px solid rgb(214, 90, 49);
+}
+
+h2 {
+    text-decoration: underline;
+}
+
+h1, p, h2 {
+    text-align: center;
+}
+
+h3 {
+    text-decoration: underline;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+}
+
+nav a {
+    padding: 10px 20px;
+    margin: 10px 7px;
+    background-color: rgb(214, 90, 49);
+    border-radius: 5px;
+    font-weight: 750;
+    text-decoration: none;
+    color: rgb(34, 40, 49);
+  }
+
+nav a:hover {
+    cursor: pointer;
+}
+
+nav a:active {
+    padding: 10px 20px;
+    margin: 10px 7px;
+    background-color: rgb(34, 40, 49);
+    border-radius: 5px;
+    font-weight: 750;
+    text-decoration: none;
+    color: rgb(214, 90, 49);
+    border: 1px solid rgb(214, 90, 49);
+}
+
+#list-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-bottom: 20px;
+}
+
+#list-container ul {
+    width: 400px;
+    text-align: left;
+    margin: 0 auto;
+}

@@ -16,40 +16,49 @@ https://canvas.oregonstate.edu/courses/1901738/pages/exploration-developing-in-f
     <h1>Data Ball</h1>
 
     <nav>
-        <a href="/">Home</a> | <a href="/seasons">Seasons</a> | <a href="/players">Players</a> | <a href="/teams">Teams</a> | <a href="/games">Games</a> | <a href="/player_stats_per_game">Player Stats Per Game</a> | <a href="/player_stats_per_season">Player Stats Per Season</a> | <a href="/team_stats_per_season">Team Stats Per Season</a>
+        <a href="/">Home</a> 
+        <a href="/seasons">Seasons</a>
+        <a href="/players">Players</a>
+        <a href="/teams">Teams</a>
+        <a href="/games">Games</a>
+        <a href="/player_stats_per_game">Player Stats Per Game</a>
+        <a href="/player_stats_per_season">Player Stats Per Season</a>
+        <a href="/team_stats_per_season">Team Stats Per Season</a>
     </nav>
 
     <h2>Teams</h2>
 
     <!-- Table displaying the Teams entity -->
-    <table>
-        <thead>
-            <tr>
-                <!-- Iterate through each key in the first entry to get the column name -->
-                {% for key in teams_data[0].keys() %}
-                
-                <!-- Create a <th> tag with the key inside of it -->
-                <th>{{ key|replace("_", " ")|title }}</th>
+    <div id="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <!-- Iterate through each key in the first entry to get the column name -->
+                    {% for key in teams_data[0].keys() %}
+                    
+                    <!-- Create a <th> tag with the key inside of it -->
+                    <th>{{ key|replace("_", " ")|title }}</th>
 
+                    {% endfor %}
+                </tr>
+            </thead>
+        
+            <tbody>
+                <!-- Iterate through every entry in Teams -->
+                {% for entry in teams_data %}
+                <tr>
+                    <!-- Iterate through every key in the current entry dictionary -->
+                    {% for key in entry.keys() %}
+
+                    <!-- Create a <td> element with the value of that key in it -->
+                    <td>{{ entry[key] }}</td>
+
+                    {% endfor %}
+                </tr>
                 {% endfor %}
-            </tr>
-        </thead>
-    
-        <tbody>
-            <!-- Iterate through every entry in Teams -->
-            {% for entry in teams_data %}
-            <tr>
-                <!-- Iterate through every key in the current entry dictionary -->
-                {% for key in entry.keys() %}
-
-                <!-- Create a <td> element with the value of that key in it -->
-                <td>{{ entry[key] }}</td>
-
-                {% endfor %}
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    </div>
 
     <!-- Form to add a team -->
     <div id="form-container">

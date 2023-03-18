@@ -16,40 +16,49 @@ https://canvas.oregonstate.edu/courses/1901738/pages/exploration-developing-in-f
     <h1>Data Ball</h1>
 
     <nav>
-        <a href="/">Home</a> | <a href="/seasons">Seasons</a> | <a href="/players">Players</a> | <a href="/teams">Teams</a> | <a href="/games">Games</a> | <a href="/player_stats_per_game">Player Stats Per Game</a> | <a href="/player_stats_per_season">Player Stats Per Season</a> | <a href="/team_stats_per_season">Team Stats Per Season</a>
+        <a href="/">Home</a> 
+        <a href="/seasons">Seasons</a>
+        <a href="/players">Players</a>
+        <a href="/teams">Teams</a>
+        <a href="/games">Games</a>
+        <a href="/player_stats_per_game">Player Stats Per Game</a>
+        <a href="/player_stats_per_season">Player Stats Per Season</a>
+        <a href="/team_stats_per_season">Team Stats Per Season</a>
     </nav>
 
     <h2>Team Stats Per Season</h2>
 
     <!-- Table displaying the Team Stats Per Season entity -->
-    <table>
-        <thead>
-            <tr>
-                <!-- Iterate through each key in the first entry to get the column name -->
-                {% for key in team_stats_data[0].keys() %}
-                    {% if key != 'team_id' and key != 'season_id' %} 
-                        <!-- Create a formatted <th> tag with the key inside of it -->
-                        <th>{{ key|replace("_", " ")|title }}</th>
-                    {% endif %}
+    <div id="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <!-- Iterate through each key in the first entry to get the column name -->
+                    {% for key in team_stats_data[0].keys() %}
+                        {% if key != 'team_id' and key != 'season_id' %} 
+                            <!-- Create a formatted <th> tag with the key inside of it -->
+                            <th>{{ key|replace("_", " ")|title }}</th>
+                        {% endif %}
+                    {% endfor %}
+                </tr>
+            </thead>
+        
+            <tbody>
+                <!-- Iterate through every entry in Team Stats Per Season -->
+                {% for stat_line in team_stats_data %}
+                <tr>
+                    <!-- Iterate through every key in the current stat_line dictionary -->
+                    {% for key in stat_line.keys() %}
+                        {% if key != 'team_id' and key != 'season_id' %} 
+                            <!-- Create a <td> element with the value of that key in it -->
+                            <td>{{ stat_line[key] }}</td>
+                        {% endif %}
+                    {% endfor %}
+                </tr>
                 {% endfor %}
-            </tr>
-        </thead>
-    
-        <tbody>
-            <!-- Iterate through every entry in Team Stats Per Season -->
-            {% for stat_line in team_stats_data %}
-            <tr>
-                <!-- Iterate through every key in the current stat_line dictionary -->
-                {% for key in stat_line.keys() %}
-                    {% if key != 'team_id' and key != 'season_id' %} 
-                        <!-- Create a <td> element with the value of that key in it -->
-                        <td>{{ stat_line[key] }}</td>
-                    {% endif %}
-                {% endfor %}
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    </div>
 
     <!-- Form to add a team's stats per season -->
     <div id="form-container">
