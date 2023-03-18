@@ -1,3 +1,8 @@
+# Citation for the following code:
+# Date: 3/18/23
+# Adapted from:
+# https://canvas.oregonstate.edu/courses/1901738/pages/exploration-developing-in-flask?module_item_id=22733738 
+
 from flask import Blueprint, Flask, render_template, json, redirect, request
 from app import mysql
 
@@ -7,8 +12,8 @@ players_routes = Blueprint('players', __name__)
 def players():
     # read Teams info
     if request.method == 'GET':
-        # mySQL query to grab all the stats in Players
-        query = "SELECT * FROM Players"
+        # mySQL query to grab all the stats in Players and join team name
+        query = "SELECT Players.player_id, Players.f_name, Players.l_name, Teams.team_name, Players.position, Players.age, Players.salary FROM Players INNER JOIN Teams ON Players.team_id = Teams.team_id"
         cursor = mysql.connection.cursor()
         cursor.execute(query)
         players_data = cursor.fetchall()

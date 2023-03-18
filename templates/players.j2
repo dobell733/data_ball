@@ -1,3 +1,8 @@
+{# Citation for the following code:
+Date: 3/18/23
+Adapted from:
+https://canvas.oregonstate.edu/courses/1901738/pages/exploration-developing-in-flask?module_item_id=22733738 #}
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -24,9 +29,10 @@
                 <th>Edit</th>
                 <!-- Iterate through each key in the first entry to get the column name -->
                 {% for key in players_data[0].keys() %}
-                
+  
                 <!-- Create a <th> tag with the key inside of it -->
-                <th>{{ key }}</th>
+      
+                    <th>{{ key|replace("_", " ")|title }}</th>
 
                 {% endfor %}
             </tr>
@@ -48,10 +54,10 @@
                 </td>
                 <!-- Iterate through every key in the current entry dictionary -->
                 {% for key in entry.keys() %}
-
-                <!-- Create a <td> element with the value of that key in it -->
-                <td>{{ entry[key] }}</td>
-
+                
+                    <!-- Create a <td> element with the value of that key in it -->
+                    <td>{{ entry[key] }}</td>
+      
                 {% endfor %}
             </tr>
             {% endfor %}
@@ -75,10 +81,10 @@
             </select>
             <br>
             <label for="f_name"> First Name: </label>
-            <input id="f_name" type="text" name="f_name" required>
+            <input id="f_name" type="text" name="f_name" maxlength="40" required>
             <br>
             <label for="l_name"> Last Name: </label>
-            <input id="l_name" type="text" name="l_name" required>
+            <input id="l_name" type="text" name="l_name" maxlength="40" required>
             <br>
             <label for="position">Position: </label>
             <select name="position" id="position" required>
@@ -90,7 +96,7 @@
             </select>
             <br>
             <label for="age"> Age: </label>
-            <input id="age" type="number" name="age" required>
+            <input id="age" type="number" name="age" min="18" required>
             <br>
             <label for="salary"> Salary: </label>
             <input id="salary" type="number" name="salary" required>

@@ -1,4 +1,10 @@
+# Citation for the following code:
+# Date: 3/18/23
+# Adapted from:
+# https://canvas.oregonstate.edu/courses/1901738/pages/exploration-developing-in-flask?module_item_id=22733738 
+
 from flask import Blueprint, Flask, render_template, json, redirect, request  
+from datetime import date
 
 game_routes = Blueprint('game_routes', __name__)
 
@@ -6,8 +12,8 @@ game_routes = Blueprint('game_routes', __name__)
 def games():
     # read Games info
     if request.method == 'GET':
-        # mySQL query to grab all the stats in Games
-        query = "SELECT * FROM Games"
+        # mySQL query to grab Games info
+        query = "SELECT Games.game_id, Home_Team.team_name AS home_team, Away_Team.team_name AS away_team, Games.game_date FROM Games JOIN Teams AS Home_Team ON Games.home_team_id = Home_Team.team_id JOIN Teams AS Away_Team ON Games.away_team_id = Away_Team.team_id"
         cursor = mysql.connection.cursor()
         cursor.execute(query)
         games_data = cursor.fetchall()
@@ -17,8 +23,10 @@ def games():
         cursor = mysql.connection.cursor()
         cursor.execute(query2)
         team_data = cursor.fetchall()
+
+        date_today = date.today()
             
-        return render_template("games.j2", games_data=games_data, team_data=team_data)
+        return render_template("games.j2", games_data=games_data, team_data=team_data, date_today=date_today)
     
     # insert a Games entry
     if request.method == 'POST':

@@ -1,3 +1,8 @@
+{# Citation for the following code:
+Date: 3/18/23
+Adapted from:
+https://canvas.oregonstate.edu/courses/1901738/pages/exploration-developing-in-flask?module_item_id=22733738 #}
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -14,50 +19,48 @@
         <a href="/">Home</a> | <a href="/seasons">Seasons</a> | <a href="/players">Players</a> | <a href="/teams">Teams</a> | <a href="/games">Games</a> | <a href="/player_stats_per_game">Player Stats Per Game</a> | <a href="/player_stats_per_season">Player Stats Per Season</a> | <a href="/team_stats_per_season">Team Stats Per Season</a>
     </nav>
 
-    <h2>Player Stats Per Season</h2>
+    <h2>Team Stats Per Season</h2>
 
-    <!-- Table displaying the Player Stats Per Game entity -->
+    <!-- Table displaying the Team Stats Per Season entity -->
     <table>
         <thead>
             <tr>
                 <!-- Iterate through each key in the first entry to get the column name -->
                 {% for key in team_stats_data[0].keys() %}
-                
-                <!-- Create a <th> tag with the key inside of it -->
-                <th>{{ key }}</th>
-
+                    {% if key != 'team_id' and key != 'season_id' %} 
+                        <!-- Create a formatted <th> tag with the key inside of it -->
+                        <th>{{ key|replace("_", " ")|title }}</th>
+                    {% endif %}
                 {% endfor %}
             </tr>
         </thead>
     
         <tbody>
-            <!-- Iterate through every entry in Player_Stats_Per_Game -->
+            <!-- Iterate through every entry in Team Stats Per Season -->
             {% for stat_line in team_stats_data %}
             <tr>
                 <!-- Iterate through every key in the current stat_line dictionary -->
                 {% for key in stat_line.keys() %}
-
-                <!-- Create a <td> element with the value of that key in it -->
-                <td>{{ stat_line[key] }}</td>
-
+                    {% if key != 'team_id' and key != 'season_id' %} 
+                        <!-- Create a <td> element with the value of that key in it -->
+                        <td>{{ stat_line[key] }}</td>
+                    {% endif %}
                 {% endfor %}
             </tr>
             {% endfor %}
         </tbody>
     </table>
 
-    <!-- Form to add a player's stats per game -->
+    <!-- Form to add a team's stats per season -->
     <div id="form-container">
         <form method="POST" action="/team_stats_per_season" id="add-team-stats-per-season">
             <legend><strong>Add Team Stats Per Season</strong></legend>
             <label for="team_id">Team: </label>
             <select name="team_id" id="team_id" required>
-                <!-- Iterate through each dictionary in the player_data -->
+                <!-- Iterate through each dictionary in the team_data from backend-->
                 {% for dict in team_data %}
-
-                <!-- This maps team_id to the name displayed in the drop down. The value sent back is player_id -->
-                <option value="{{ dict['team_id'] }}">{{ dict['team_name'] }} (id: {{ dict['team_id'] }})</option>
-
+                    <!-- This maps team_id to the name displayed in the drop down. The value sent back is team_id -->
+                    <option value="{{ dict['team_id'] }}">{{ dict['team_name'] }} (id: {{ dict['team_id'] }})</option>
                  {% endfor %}
         </select>
             <br>
@@ -65,20 +68,18 @@
             <select name="season_id" id="season_id" required>
                 <!-- This maps season_id to year so the user only has to select the year but the value being sent back to the server will be the season_id. -->
                 {% for dict in season_data %}
-
-                <option value="{{ dict['season_id'] }}">{{ dict['year'] }} (id: {{ dict['season_id'] }})</option>
-
+                    <option value="{{ dict['season_id'] }}">{{ dict['year'] }} (id: {{ dict['season_id'] }})</option>
                 {% endfor %}
             </select>
             <br>
             <label for="rank">Rank: </label>
-            <input id="rank" type="rank" name="rank" min="1" required>
+            <input id="rank" type="number" name="rank" min="1" max="30" required>
             <br>
             <label for="win_count">Win Count: </label>
-            <input id="win_count" type="number" name="win_count" required>
+            <input id="win_count" type="number" name="win_count" min="0" max="82" required>
             <br>
             <label for="loss_count">Loss Count: </label>
-            <input id="loss_count" type="number" name="loss_count" required>
+            <input id="loss_count" type="number" name="loss_count" min="0" max="82" required>
             <br>
             <input type="submit" value="Add Team Season Stats" name="Add_Team_Seasons_Stats" class="btn"">
         </form>

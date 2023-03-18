@@ -1,3 +1,8 @@
+# Citation for the following code:
+# Date: 3/18/23
+# Adapted from:
+# https://canvas.oregonstate.edu/courses/1901738/pages/exploration-developing-in-flask?module_item_id=22733738 
+
 from flask import Blueprint, Flask, render_template, json, redirect, request
 from app import mysql
 
@@ -7,13 +12,13 @@ team_sps_routes = Blueprint('team_sps', __name__)
 def team_stats_per_season():
     # read Player_Stats_Per_Season info
     if request.method == 'GET':
-        # mySQL query to grab all the stats in Team_Stats_Per_Season
-        query = "SELECT * FROM Team_Stats_Per_Season"
+        # mySQL query to grab all the stats in Team_Stats_Per_Season and join season year and team rank
+        query = "SELECT Team_Stats_Per_Season.team_stats_per_season_id, Team_Stats_Per_Season.team_id, Team_Stats_Per_Season.season_id, Teams.team_name, Seasons.year, Team_Stats_Per_Season.rank, Team_Stats_Per_Season.win_count, Team_Stats_Per_Season.loss_count FROM Team_Stats_Per_Season INNER JOIN Teams ON Team_Stats_Per_Season.team_id = Teams.team_id INNER JOIN Seasons ON Team_Stats_Per_Season.season_id = Seasons.season_id"
         cursor = mysql.connection.cursor()
         cursor.execute(query)
         team_stats_data = cursor.fetchall()
 
-        # mySQL query to grab the player's names and ids to use in the drop down
+        # mySQL query to grab the team's ids and names to use in the drop down
         query2 = "SELECT team_id, team_name FROM Teams"
         cursor = mysql.connection.cursor()
         cursor.execute(query2)
@@ -46,7 +51,4 @@ def team_stats_per_season():
 
             # redirect back to player stats per season page
             return redirect("/team_stats_per_season")
-
-
-# keep this here to avoid ImportError
-from app import mysql   
+  

@@ -1,3 +1,8 @@
+# Citation for the following code:
+# Date: 3/18/23
+# Adapted from:
+# https://canvas.oregonstate.edu/courses/1901738/pages/exploration-developing-in-flask?module_item_id=22733738 
+
 from flask import Blueprint, Flask, render_template, json, redirect, request
 from app import mysql
 

@@ -1,3 +1,8 @@
+# Citation for the following code:
+# Date: 3/18/23
+# Adapted from:
+# https://canvas.oregonstate.edu/courses/1901738/pages/exploration-developing-in-flask?module_item_id=22733738 
+
 from flask import Blueprint, Flask, render_template, json, redirect, request
 from app import mysql
 
@@ -7,8 +12,8 @@ player_sps_routes = Blueprint('player_sps', __name__)
 def player_stats_per_season():
     # read Player_Stats_Per_Season info
     if request.method == 'GET':
-        # mySQL query to grab all the stats in Player_Stats_Per_Season
-        query = "SELECT * FROM Player_Stats_Per_Season"
+        # mySQL query to grab all the stats in Player_Stats_Per_Season and join player name and season year
+        query = "SELECT Player_Stats_Per_Season.player_stats_per_season_id, Player_Stats_Per_Season.player_id, Player_Stats_Per_Season.season_id, CONCAT(Players.f_name, ' ', Players.l_name) AS player_name, Seasons.year, Player_Stats_Per_Season.average_minutes_per_game, Player_Stats_Per_Season.field_goal_percentage, Player_Stats_Per_Season.three_point_percentage, Player_Stats_Per_Season.two_point_percentage, Player_Stats_Per_Season.free_throw_percentage, Player_Stats_Per_Season.rebound_count, Player_Stats_Per_Season.assist_count, Player_Stats_Per_Season.steal_count, Player_Stats_Per_Season.block_count FROM Player_Stats_Per_Season INNER JOIN Players ON Player_Stats_Per_Season.player_id = Players.player_id INNER JOIN Seasons ON Player_Stats_Per_Season.season_id = Seasons.season_id"
         cursor = mysql.connection.cursor()
         cursor.execute(query)
         player_stats_data = cursor.fetchall()

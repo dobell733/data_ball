@@ -260,13 +260,92 @@ AND season_id = (SELECT season.game_id FROM Seasons WHERE season_year = :season_
 
 
 ------------------------------------------------------------------------------
--- Drop Down queries --
+-- Drop Down / JOIN queries --
 ------------------------------------------------------------------------------
 -- mySQL query to grab all the stats in Player_Stats_Per_Game
-SELECT * FROM Player_Stats_Per_Game
+SELECT * FROM Player_Stats_Per_Game;
 
 -- mySQL query to grab the player's names and ids to use in the drop down
-SELECT player_id, CONCAT(f_name, ' ',l_name) AS name FROM Players
+SELECT player_id, CONCAT(f_name, ' ',l_name) AS name FROM Players;
 
 -- mySQL query to grab the game ids and dates to use in the drop down
-SELECT game_id, game_date FROM Games
+SELECT game_id, game_date FROM Games;
+
+-- mySQL query to grab the team's ids and names to use in the drop down
+SELECT team_id, team_name FROM Teams;
+
+-- mySQL query to grab the season ids and years to use in the drop down
+SELECT season_id, year FROM Seasons;
+
+-- mySQL query to grab all the stats in Team_Stats_Per_Season and join season year and team rank
+SELECT Team_Stats_Per_Season.team_stats_per_season_id, 
+        Team_Stats_Per_Season.team_id, 
+        Team_Stats_Per_Season.season_id, 
+        Teams.team_name, 
+        Seasons.year, 
+        Team_Stats_Per_Season.rank, 
+        Team_Stats_Per_Season.win_count, 
+        Team_Stats_Per_Season.loss_count 
+FROM Team_Stats_Per_Season 
+INNER JOIN Teams ON Team_Stats_Per_Season.team_id = Teams.team_id 
+INNER JOIN Seasons ON Team_Stats_Per_Season.season_id = Seasons.season_id;
+
+-- mySQL query to grab all the stats in Player_Stats_Per_Season and join player name and season year
+SELECT Player_Stats_Per_Season.player_stats_per_season_id, 
+        Player_Stats_Per_Season.player_id, 
+        Player_Stats_Per_Season.season_id, 
+        CONCAT(Players.f_name, ' ', Players.l_name) AS player_name, 
+        Seasons.year, 
+        Player_Stats_Per_Season.average_minutes_per_game, 
+        Player_Stats_Per_Season.field_goal_percentage, 
+        Player_Stats_Per_Season.three_point_percentage, 
+        Player_Stats_Per_Season.two_point_percentage, 
+        Player_Stats_Per_Season.free_throw_percentage, 
+        Player_Stats_Per_Season.rebound_count, 
+        Player_Stats_Per_Season.assist_count, 
+        Player_Stats_Per_Season.steal_count, 
+        Player_Stats_Per_Season.block_count 
+FROM Player_Stats_Per_Season 
+INNER JOIN Players ON Player_Stats_Per_Season.player_id = Players.player_id 
+INNER JOIN Seasons ON Player_Stats_Per_Season.season_id = Seasons.season_id;
+
+-- mySQL query to grab Games info and join team names
+SELECT Games.game_id, 
+        Home_Team.team_name AS home_team, 
+        Away_Team.team_name AS away_team, 
+        Games.game_date 
+FROM Games 
+JOIN Teams AS Home_Team ON Games.home_team_id = Home_Team.team_id 
+JOIN Teams AS Away_Team ON Games.away_team_id = Away_Team.team_id;
+
+-- mySQL query to grab all the stats in Player_Stats_Per_Game and join player name and game date
+SELECT Player_Stats_Per_Game.player_stats_per_game_id, 
+        Player_Stats_Per_Game.player_id, 
+        Player_Stats_Per_Game.game_id, 
+        CONCAT(Players.f_name, ' ', Players.l_name) AS player_name, 
+        Games.game_date, 
+        Player_Stats_Per_Game.minutes_per_game, 
+        Player_Stats_Per_Game.field_goal_percentage, 
+        Player_Stats_Per_Game.three_point_percentage, 
+        Player_Stats_Per_Game.two_point_percentage, 
+        Player_Stats_Per_Game.free_throw_percentage, 
+        Player_Stats_Per_Game.rebound_count, 
+        Player_Stats_Per_Game.assist_count, 
+        Player_Stats_Per_Game.steal_count, 
+        Player_Stats_Per_Game.block_count, 
+        Player_Stats_Per_Game.win 
+FROM Player_Stats_Per_Game 
+INNER JOIN Players ON Player_Stats_Per_Game.player_id = Players.player_id 
+INNER JOIN Games ON Player_Stats_Per_Game.game_id = Games.game_id;
+
+-- mySQL query to grab all the stats in Players and join team name
+SELECT Players.player_id, 
+        Players.f_name, 
+        Players.l_name, 
+        Teams.team_name, 
+        Players.position, 
+        Players.age, 
+        Players.salary 
+FROM Players 
+INNER JOIN Teams ON Players.team_id = Teams.team_id;
+

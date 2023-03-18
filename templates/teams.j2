@@ -1,3 +1,8 @@
+{# Citation for the following code:
+Date: 3/18/23
+Adapted from:
+https://canvas.oregonstate.edu/courses/1901738/pages/exploration-developing-in-flask?module_item_id=22733738 #}
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -24,7 +29,7 @@
                 {% for key in teams_data[0].keys() %}
                 
                 <!-- Create a <th> tag with the key inside of it -->
-                <th>{{ key }}</th>
+                <th>{{ key|replace("_", " ")|title }}</th>
 
                 {% endfor %}
             </tr>
@@ -51,7 +56,7 @@
         <form method="POST" action="/teams" id="add-team">
             <legend><strong>Add Team</strong></legend>
             <label for="team_name">Team Name: </label>
-            <input id="team_name" type="text" name="team_name" required>
+            <input id="team_name" type="text" name="team_name" maxlength="60" required>
             <br>
             <input type="submit" value="Add Team" name="Add_Team" class="btn"">
         </form>
