@@ -13,7 +13,7 @@ def players():
     # read Teams info
     if request.method == 'GET':
         # mySQL query to grab all the stats in Players and join team name
-        query = "SELECT Players.player_id, Players.f_name, Players.l_name, Teams.team_name, Players.position, Players.age, Players.salary FROM Players INNER JOIN Teams ON Players.team_id = Teams.team_id"
+        query = "SELECT Players.player_id, Players.f_name, Players.l_name, Teams.team_name, Players.position, Players.age, Players.salary FROM Players LEFT JOIN Teams ON Players.team_id = Teams.team_id"
         cursor = mysql.connection.cursor()
         cursor.execute(query)
         players_data = cursor.fetchall()
@@ -38,18 +38,20 @@ def players():
             salary = request.form["salary"]
             
             # change the front end value to a value that back end can understand if team_id is set to NULL
-            if team_id == "NULL":
-                team_id = None
-
+            if team_id == "0":
+                query = "INSERT INTO Players (team_id, f_name, l_name, position, age, salary) VALUES (NULL, %s, %s, %s, %s, %s)"
+                cursor = mysql.connection.cursor()
+                cursor.execute(query, (f_name, l_name, position, age, salary))
+                mysql.connection.commit()
+                return redirect("/players")
             # add user inputs to database
-            query = "INSERT INTO Players (team_id, f_name, l_name, position, age, salary) VALUES (%s, %s, %s, %s, %s, %s)"
-            cursor = mysql.connection.cursor()
-            cursor.execute(query, (team_id, f_name, l_name, position, age, salary))
-            mysql.connection.commit()
+            else:
+                query = "INSERT INTO Players (team_id, f_name, l_name, position, age, salary) VALUES (%s, %s, %s, %s, %s, %s)"
+                cursor = mysql.connection.cursor()
+                cursor.execute(query, (team_id, f_name, l_name, position, age, salary))
+                mysql.connection.commit()
+                return redirect("/players")
 
-            # redirect back to games page
-            return redirect("/players")
-        
         #activates if user presses the Update Player button
         if request.form.get("Update_Player"):
             # grab user form inputs
