@@ -56,4 +56,4 @@ app.register_blueprint(update_player_routes)
 # Listener
 if __name__ == "__main__":
 
-    app.run(port=56032, debug=True)
+    app.run(port=56031, debug=True)
