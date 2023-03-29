@@ -158,3 +158,17 @@ nav a:active {
     text-align: left;
     margin: 0 auto;
 }
+
+.home_paragraph {
+    margin: 0 400px;
+}
+
+@media only screen and (max-width: 1636px) {
+    .home_paragraph {
+        margin: 0 auto;
+    }
+
+    nav {
+        flex-direction: column;
+    }
+}

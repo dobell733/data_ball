@@ -4,10 +4,10 @@ import os
 
 app = Flask(__name__)
 
-app.config['MYSQL_HOST'] = 'classmysql.engr.oregonstate.edu'
-app.config['MYSQL_USER'] = 'cs340_belldo'
-app.config['MYSQL_PASSWORD'] = '2444' #last 4 of onid
-app.config['MYSQL_DB'] = 'cs340_belldo'
+app.config['MYSQL_HOST'] = 'sql9.freesqldatabase.com'
+app.config['MYSQL_USER'] = 'sql9609677'
+app.config['MYSQL_PASSWORD'] = 'IMTa9lULdh'
+app.config['MYSQL_DB'] = 'sql9609677'
 app.config['MYSQL_CURSORCLASS'] = "DictCursor"
 
 
