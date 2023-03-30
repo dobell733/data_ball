@@ -107,6 +107,11 @@ h2 {
     text-decoration: underline;
 }
 
+h1 {
+    padding-top: 30px;
+}
+
+
 h1, p, h2 {
     text-align: center;
 }
