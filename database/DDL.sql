@@ -13,10 +13,10 @@ CREATE or REPLACE TABLE Seasons (
 
 -- Insert Data into Seasons
 INSERT INTO Seasons (year)
-VALUES ('2010'),
-    ('2011'),
-    ('2012'),
-    ('2014');
+VALUES ('2018'),
+    ('2019'),
+    ('2020'),
+    ('2021');
 
 -- Creates an entity table named Teams
 
@@ -28,10 +28,11 @@ CREATE or REPLACE TABLE Teams (
 
 -- Insert Data into Teams
 INSERT INTO Teams (team_name)
-VALUES ('Miami Heat'),
+VALUES ('Phoenix Suns'),
     ('Brooklyn Nets'),
     ('Golden State Warriors'),
-    ('OKC');
+    ('Milwaukee Bucks'),
+    ('Los Angeles Lakers');
 
 
 -- Creates an entity table named Games
@@ -48,10 +49,10 @@ CREATE or REPLACE TABLE Games (
 -- Insert Data into Games
 
 INSERT INTO Games (home_team_id, away_team_id, game_date)
-VALUES (1, 2, '2021-02-01'),
-    (2, 1, '2021-03-03'),
-    (3, 4, '2021-03-04'),
-    (4, 3, '2022-04-04');
+VALUES (1, 5, '2018-10-24'),
+    (2, 4, '2020-01-18'),
+    (5, 3, '2021-01-18'),
+    (5, 1, '2021-10-22');
 
 -- Creates an entity table named Players
 CREATE or REPLACE TABLE Players (
@@ -69,10 +70,10 @@ CREATE or REPLACE TABLE Players (
 -- Insert Data into Players
 
 INSERT INTO Players (team_id, f_name, l_name, position, age, salary)
-VALUES (1, 'Luka', 'Doncic', 'Shooting Guard', 23, 12000000),
-    (2, 'Lebron', 'James', 'Power Forward', 28, 50000000),
-    (3, 'Kevin', 'Durant', 'Point Guard', 23, 40000000),
-    (4, 'Giannis', 'Antetokounmpo', 'Center', 23, 100000000);
+VALUES (1, 'Devin', 'Booker', 'Shooting Guard', 26, 34000000),
+    (2, 'Lebron', 'James', 'Power Forward', 38, 44000000),
+    (3, 'Kevin', 'Durant', 'Small Forward', 34, 43000000),
+    (4, 'Giannis', 'Antetokounmpo', 'Center', 28, 39000000);
 
 -- Creates an intersection table named Player_Stats_Per_Games
 CREATE or REPLACE TABLE Player_Stats_Per_Game (
