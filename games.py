@@ -1,5 +1,4 @@
-from flask import Blueprint, Flask, render_template, json, redirect, request
-from app import mysql   
+from flask import Blueprint, Flask, render_template, json, redirect, request   
 from datetime import date
 
 game_routes = Blueprint('game_routes', __name__)
@@ -43,4 +42,4 @@ def games():
             return redirect("/games")
 
 # keep this here to avoid ImportError
-# from app import mysql     
+from app import mysql     
