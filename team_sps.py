@@ -8,7 +8,7 @@ def team_stats_per_season():
     # read Player_Stats_Per_Season info
     if request.method == 'GET':
         # mySQL query to grab all the stats in Team_Stats_Per_Season and join season year and team rank
-        query = "SELECT Team_Stats_Per_Season.team_stats_per_season_id, Team_Stats_Per_Season.team_id, Team_Stats_Per_Season.season_id, Teams.team_name, Seasons.year, Team_Stats_Per_Season.rank, Team_Stats_Per_Season.win_count, Team_Stats_Per_Season.loss_count FROM Team_Stats_Per_Season INNER JOIN Teams ON Team_Stats_Per_Season.team_id = Teams.team_id INNER JOIN Seasons ON Team_Stats_Per_Season.season_id = Seasons.season_id"
+        query = "SELECT Team_Stats_Per_Season.team_stats_per_season_id, Team_Stats_Per_Season.team_id, Team_Stats_Per_Season.season_id, Teams.team_name, Seasons.year, Team_Stats_Per_Season.team_rank, Team_Stats_Per_Season.win_count, Team_Stats_Per_Season.loss_count FROM Team_Stats_Per_Season INNER JOIN Teams ON Team_Stats_Per_Season.team_id = Teams.team_id INNER JOIN Seasons ON Team_Stats_Per_Season.season_id = Seasons.season_id"
         cursor = mysql.connection.cursor()
         cursor.execute(query)
         team_stats_data = cursor.fetchall()
@@ -39,7 +39,7 @@ def team_stats_per_season():
             loss_count =request.form["loss_count"]
 
             # add user inputs to database
-            query = "INSERT INTO Team_Stats_Per_Season (team_id, season_id, rank, win_count, loss_count) VALUES (%s, %s, %s, %s, %s)"
+            query = "INSERT INTO Team_Stats_Per_Season (team_id, season_id, team_rank, win_count, loss_count) VALUES (%s, %s, %s, %s, %s)"
             cursor = mysql.connection.cursor()
             cursor.execute(query, (team_id, season_id, rank, win_count, loss_count))
             mysql.connection.commit()
