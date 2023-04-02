@@ -137,7 +137,7 @@ CREATE or REPLACE TABLE Team_Stats_Per_Season (
     team_stats_per_season_id int NOT NULL AUTO_INCREMENT,
     team_id int NOT NULL,
     season_id int NOT NULL,
-    rank int NOT NULL,
+    team_rank int NOT NULL,
     win_count int NOT NULL,
     loss_count int NOT NULL,
     FOREIGN KEY (team_id) REFERENCES Teams(team_id) ON DELETE CASCADE,
@@ -146,7 +146,7 @@ CREATE or REPLACE TABLE Team_Stats_Per_Season (
 );
 
 -- Insert Data intp Team_Stats_Per_Season
-INSERT INTO Team_Stats_Per_Season (team_id, season_id, rank, win_count, loss_count)
+INSERT INTO Team_Stats_Per_Season (team_id, season_id, team_rank, win_count, loss_count)
 VALUES (1, 1, 1, 45, 2),
         (2, 1, 2, 40, 7),
         (3, 1, 3, 35, 12),
