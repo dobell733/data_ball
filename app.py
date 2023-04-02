@@ -1,4 +1,5 @@
 from flask import Flask, render_template, json, redirect, request
+from dotenv import load_dotenv
 from flask_mysqldb import MySQL
 import os
 
