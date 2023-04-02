@@ -4,12 +4,16 @@ import os
 
 app = Flask(__name__)
 
-app.config['MYSQL_HOST'] = 'sql9.freesqldatabase.com'
-app.config['MYSQL_USER'] = 'sql9609677'
-app.config['MYSQL_PASSWORD'] = 'IMTa9lULdh'
-app.config['MYSQL_DB'] = 'sql9609677'
-app.config['MYSQL_CURSORCLASS'] = "DictCursor"
-
+# app.config['MYSQL_HOST'] = 'sql9.freesqldatabase.com'
+# app.config['MYSQL_USER'] = 'sql9609677'
+# app.config['MYSQL_PASSWORD'] = 'IMTa9lULdh'
+# app.config['MYSQL_DB'] = 'sql9609677'
+# app.config['MYSQL_CURSORCLASS'] = "DictCursor"
+DB_HOST = os.environ.get('JAWSDB_HOST')
+DB_PORT = os.environ.get('JAWSDB_PORT')
+DB_USER = os.environ.get('JAWSDB_USER')
+DB_PASSWORD = os.environ.get('JAWSDB_PASSWORD')
+DB_NAME = os.environ.get('JAWSDB_NAME')
 
 mysql = MySQL(app)
 
