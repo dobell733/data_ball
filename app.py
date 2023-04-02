@@ -11,7 +11,6 @@ app.config['MYSQL_PASSWORD'] = os.environ.get('JAWSDB_PASSWORD')
 app.config['MYSQL_DB'] = os.environ.get('JAWSDB_NAME')
 app.config['MYSQL_CURSORCLASS'] = "DictCursor"
 
-# DB_PORT = os.environ.get('JAWSDB_PORT')
 
 mysql = MySQL(app)
 

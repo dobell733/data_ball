@@ -1,1 +1,1 @@
-web: gunicorn data-ball-1:app
+web: gunicorn app:app
