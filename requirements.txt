@@ -1,5 +1,5 @@
 click==7.1.2
-colorama==g0.4.6
+colorama==0.4.6
 Flask==1.1.2
 Flask-MySQLdb==0.2.0
 gunicorn==20.0.4
